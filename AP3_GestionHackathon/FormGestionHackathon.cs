@@ -50,7 +50,7 @@ namespace AP3_GestionHackathon
             RemplirListeOrganisateurs();
             if (etat == EtatGestion.Create) // cas etat create
             {
-                label1.Text = "Ajout d'un Hackathon";
+                label1.Text = "Ajout d'un Hackathon";  
                 BtnAction.Text = "AJOUTER";
                 gbInfo.Visible = true;
                 cbListe.Visible = false;
