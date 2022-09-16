@@ -21,6 +21,7 @@ namespace AP3_GestionHackathon
         }
     
         public int idhackathon { get; set; }
+        public System.DateTime DateButoirInscrip { get; set; }
         public System.DateTime dateheuredebuth { get; set; }
         public System.DateTime dateheurefinh { get; set; }
         public string lieu { get; set; }
@@ -30,6 +31,7 @@ namespace AP3_GestionHackathon
         public string affiche { get; set; }
         public string objectifs { get; set; }
         public Nullable<int> idorganisateur { get; set; }
+        public int nbPlaceMax { get; set; }
     
         public virtual ORGANISATEUR ORGANISATEUR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

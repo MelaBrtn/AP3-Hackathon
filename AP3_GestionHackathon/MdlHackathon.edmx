@@ -31,6 +31,7 @@
             <PropertyRef Name="idhackathon" />
           </Key>
           <Property Name="idhackathon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateButoirInscrip" Type="date" Nullable="false" />
           <Property Name="dateheuredebuth" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="dateheurefinh" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="lieu" Type="varchar" MaxLength="128" Nullable="false" />
@@ -40,6 +41,7 @@
           <Property Name="affiche" Type="varchar" MaxLength="255" />
           <Property Name="objectifs" Type="varchar" MaxLength="255" />
           <Property Name="idorganisateur" Type="int" />
+          <Property Name="nbPlaceMax" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="INSCRIRE">
           <Key>
@@ -148,13 +150,13 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MdlHackathonStoreContainer">
-          <EntitySet Name="ADMINISTRATEUR" EntityType="Self.ADMINISTRATEUR" Schema="AP3_BD_HACKATHON_INITIAL" store:Type="Tables" />
-          <EntitySet Name="EQUIPE" EntityType="Self.EQUIPE" Schema="AP3_BD_HACKATHON_INITIAL" store:Type="Tables" />
-          <EntitySet Name="HACKATHON" EntityType="Self.HACKATHON" Schema="AP3_BD_HACKATHON_INITIAL" store:Type="Tables" />
-          <EntitySet Name="INSCRIRE" EntityType="Self.INSCRIRE" Schema="AP3_BD_HACKATHON_INITIAL" store:Type="Tables" />
-          <EntitySet Name="MEMBRE" EntityType="Self.MEMBRE" Schema="AP3_BD_HACKATHON_INITIAL" store:Type="Tables" />
-          <EntitySet Name="ORGANISATEUR" EntityType="Self.ORGANISATEUR" Schema="AP3_BD_HACKATHON_INITIAL" store:Type="Tables" />
-          <EntitySet Name="TOKEN" EntityType="Self.TOKEN" Schema="AP3_BD_HACKATHON_INITIAL" store:Type="Tables" />
+          <EntitySet Name="ADMINISTRATEUR" EntityType="Self.ADMINISTRATEUR" Schema="virtualhackathon" store:Type="Tables" />
+          <EntitySet Name="EQUIPE" EntityType="Self.EQUIPE" Schema="virtualhackathon" store:Type="Tables" />
+          <EntitySet Name="HACKATHON" EntityType="Self.HACKATHON" Schema="virtualhackathon" store:Type="Tables" />
+          <EntitySet Name="INSCRIRE" EntityType="Self.INSCRIRE" Schema="virtualhackathon" store:Type="Tables" />
+          <EntitySet Name="MEMBRE" EntityType="Self.MEMBRE" Schema="virtualhackathon" store:Type="Tables" />
+          <EntitySet Name="ORGANISATEUR" EntityType="Self.ORGANISATEUR" Schema="virtualhackathon" store:Type="Tables" />
+          <EntitySet Name="TOKEN" EntityType="Self.TOKEN" Schema="virtualhackathon" store:Type="Tables" />
           <AssociationSet Name="hackathon_ibfk_1" Association="Self.hackathon_ibfk_1">
             <End Role="ORGANISATEUR" EntitySet="ORGANISATEUR" />
             <End Role="HACKATHON" EntitySet="HACKATHON" />
@@ -210,6 +212,7 @@
             <PropertyRef Name="idhackathon" />
           </Key>
           <Property Name="idhackathon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateButoirInscrip" Type="DateTime" Nullable="false" />
           <Property Name="dateheuredebuth" Type="DateTime" Nullable="false" />
           <Property Name="dateheurefinh" Type="DateTime" Nullable="false" />
           <Property Name="lieu" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
@@ -219,6 +222,7 @@
           <Property Name="affiche" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="objectifs" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="idorganisateur" Type="Int32" />
+          <Property Name="nbPlaceMax" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ORGANISATEUR" Relationship="Self.hackathon_ibfk_1" FromRole="HACKATHON" ToRole="ORGANISATEUR" />
           <NavigationProperty Name="INSCRIRE" Relationship="Self.inscrire_ibfk_1" FromRole="HACKATHON" ToRole="INSCRIRE" />
         </EntityType>
@@ -333,7 +337,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AP3_BD_HACKATHON_INITIALEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="virtualhackathonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ADMINISTRATEUR" EntityType="Self.ADMINISTRATEUR" />
           <EntitySet Name="EQUIPE" EntityType="Self.EQUIPE" />
           <EntitySet Name="HACKATHON" EntityType="Self.HACKATHON" />
@@ -367,7 +371,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MdlHackathonStoreContainer" CdmEntityContainer="AP3_BD_HACKATHON_INITIALEntities">
+        <EntityContainerMapping StorageEntityContainer="MdlHackathonStoreContainer" CdmEntityContainer="virtualhackathonEntities">
           <EntitySetMapping Name="ADMINISTRATEUR">
             <EntityTypeMapping TypeName="MdlHackathon.ADMINISTRATEUR">
               <MappingFragment StoreEntitySet="ADMINISTRATEUR">
@@ -395,6 +399,7 @@
             <EntityTypeMapping TypeName="MdlHackathon.HACKATHON">
               <MappingFragment StoreEntitySet="HACKATHON">
                 <ScalarProperty Name="idhackathon" ColumnName="idhackathon" />
+                <ScalarProperty Name="DateButoirInscrip" ColumnName="DateButoirInscrip" />
                 <ScalarProperty Name="dateheuredebuth" ColumnName="dateheuredebuth" />
                 <ScalarProperty Name="dateheurefinh" ColumnName="dateheurefinh" />
                 <ScalarProperty Name="lieu" ColumnName="lieu" />
@@ -404,6 +409,7 @@
                 <ScalarProperty Name="affiche" ColumnName="affiche" />
                 <ScalarProperty Name="objectifs" ColumnName="objectifs" />
                 <ScalarProperty Name="idorganisateur" ColumnName="idorganisateur" />
+                <ScalarProperty Name="nbPlaceMax" ColumnName="nbPlaceMax" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

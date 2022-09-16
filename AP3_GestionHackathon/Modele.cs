@@ -9,14 +9,14 @@ namespace AP3_GestionHackathon
 {
     public static class Modele
     {
-        private static AP3_BD_HACKATHON_INITIALEntities maConnexion;
+        private static virtualhackathonEntities maConnexion;
 
         /// <summary>
         /// initialise la connexion à la BD
         /// </summary>
         public static void init()
         {
-            maConnexion = new AP3_BD_HACKATHON_INITIALEntities();
+            maConnexion = new virtualhackathonEntities();
         }
 
         /// <summary>
