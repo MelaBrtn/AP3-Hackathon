@@ -17,6 +17,8 @@
         <AssociationConnector Association="MdlHackathon.token_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="MdlHackathon.hackathon_ibfk_1" ManuallyRouted="false" />
         <AssociationConnector Association="MdlHackathon.inscrire_ibfk_1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MdlHackathon.ENTREPRISE" Width="1.5" PointX="5.25" PointY="7.375" />
+        <AssociationConnector Association="MdlHackathon.ENTREPRISE_ibfk_1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

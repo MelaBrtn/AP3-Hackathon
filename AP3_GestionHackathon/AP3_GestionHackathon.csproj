@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net, Version=0.1.4141.31969, Culture=neutral, PublicKeyToken=f3bc8f8c31beeb49, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net.0.1.0\lib\net35\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -85,14 +88,36 @@
     <Compile Include="ADMINISTRATEUR.cs">
       <DependentUpon>MdlHackathon.tt</DependentUpon>
     </Compile>
+    <Compile Include="ENTREPRISE.cs">
+      <DependentUpon>MdlHackathon.tt</DependentUpon>
+    </Compile>
     <Compile Include="EQUIPE.cs">
       <DependentUpon>MdlHackathon.tt</DependentUpon>
     </Compile>
+    <Compile Include="EtatGestion.cs" />
     <Compile Include="FormAjoutOrganisateur.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormAjoutOrganisateur.Designer.cs">
       <DependentUpon>FormAjoutOrganisateur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConnexion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConnexion.Designer.cs">
+      <DependentUpon>FormConnexion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEquipes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEquipes.Designer.cs">
+      <DependentUpon>FormEquipes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestionEquipe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionEquipe.Designer.cs">
+      <DependentUpon>FormGestionEquipe.cs</DependentUpon>
     </Compile>
     <Compile Include="FormGestionHackathon.cs">
       <SubType>Form</SubType>
@@ -100,11 +125,23 @@
     <Compile Include="FormGestionHackathon.Designer.cs">
       <DependentUpon>FormGestionHackathon.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormGestionMembre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestionMembre.Designer.cs">
+      <DependentUpon>FormGestionMembre.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormHackathon.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormHackathon.Designer.cs">
       <DependentUpon>FormHackathon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMembre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMembre.Designer.cs">
+      <DependentUpon>FormMembre.cs</DependentUpon>
     </Compile>
     <Compile Include="FormMenu.cs">
       <SubType>Form</SubType>
@@ -148,11 +185,26 @@
     <EmbeddedResource Include="FormAjoutOrganisateur.resx">
       <DependentUpon>FormAjoutOrganisateur.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormConnexion.resx">
+      <DependentUpon>FormConnexion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEquipes.resx">
+      <DependentUpon>FormEquipes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionEquipe.resx">
+      <DependentUpon>FormGestionEquipe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGestionHackathon.resx">
       <DependentUpon>FormGestionHackathon.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormGestionMembre.resx">
+      <DependentUpon>FormGestionMembre.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormHackathon.resx">
       <DependentUpon>FormHackathon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMembre.resx">
+      <DependentUpon>FormMembre.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>

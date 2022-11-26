@@ -10,10 +10,11 @@ using System.Windows.Forms;
 
 namespace AP3_GestionHackathon
 {
-    public enum EtatGestion
+    public enum EtatGestion1
     {
         Create, 
-        Update
+        Update,
+        Delete
     }
     public partial class FormGestionHackathon : Form
     {
@@ -50,16 +51,24 @@ namespace AP3_GestionHackathon
             RemplirListeOrganisateurs();
             if (etat == EtatGestion.Create) // cas etat create
             {
-                label1.Text = "Ajout d'un Hackathon";  
+                label1.Text = "Ajout d'un Hackathon";
                 BtnAction.Text = "AJOUTER";
                 gbInfo.Visible = true;
                 cbListe.Visible = false;
 
             }
-            else // cas etat update
+            if(etat == EtatGestion.Update) // cas etat update
             {
                 label1.Text = "Modification d'un Hackathon";
                 BtnAction.Text = "MODIFIER";
+                gbInfo.Visible = false;
+                cbListe.Visible = true;
+                RemplirListeHackathons();
+            }
+            if (etat == EtatGestion.Delete)// cas etat delete
+            {
+                label1.Text = "Suppression d'un Hackathon";
+                BtnAction.Text = "Supprimer";
                 gbInfo.Visible = false;
                 cbListe.Visible = true;
                 RemplirListeHackathons();
@@ -70,57 +79,78 @@ namespace AP3_GestionHackathon
         {
             dtDebut.Value = DateTime.Now;
             dtFin.Value = DateTime.Now;
+            dtdateButoirInscrip.Value = DateTime.Now;
             tbAffiche.Clear();
             tbLieu.Clear();
             tbVille.Clear();
             tbObjectifs.Clear();
             tbConditions.Clear();
             tbThematique.Clear();
+            tbnbPlaceMax.Clear();
             cbOrganisateur.SelectedIndex = -1;
             tbLieu.Focus();
         }
         private void Button1_Click(object sender, EventArgs e)
         {
             int idOrga = -1;
+            int nbPlaceMax;
             string lieu, ville, thematique, objectifs, conditions, affiche;
             DateTime dateDeb, dateFin;
+            DateTime dateButoirInscrip;
 
             if (tbLieu.Text !="" && tbVille.Text !="" && tbThematique.Text !="")
             {
                 // ajout possible si les champs lieu, ville et thématique au moins remplis
-                if (dtDebut.Value < dtFin.Value && dtDebut.Value >= DateTime.Now)
+                if (dtdateButoirInscrip.Value == DateTime.Now)
                 {
-                    // ajout possible si la date de début en avant la date de fin et si la date de début est bien supérieure ou égale à la date du jour
-                    lieu = tbLieu.Text;
-                    ville = tbVille.Text;
-                    thematique = tbThematique.Text;
-                    objectifs = tbObjectifs.Text;
-                    conditions = tbConditions.Text;
-                    affiche = tbAffiche.Text;
-                    dateDeb = dtDebut.Value;
-                    dateFin = dtFin.Value;
-                    if (cbOrganisateur.SelectedIndex != -1)
+                    if (dtDebut.Value < dtFin.Value && dtDebut.Value >= DateTime.Now)
                     {
-                        idOrga = Convert.ToInt32(cbOrganisateur.SelectedValue.ToString());
-                    }
-
-                    if (etat == EtatGestion.Create) // cas de l'ajout
-                    {
-                        if (Modele.AjoutHackathon(lieu, ville, thematique, objectifs, conditions, affiche, dateDeb, dateFin, idOrga))
+                        // ajout possible si la date de début en avant la date de fin et si la date de début est bien supérieure ou égale à la date du jour
+                        lieu = tbLieu.Text;
+                        ville = tbVille.Text;
+                        thematique = tbThematique.Text;
+                        objectifs = tbObjectifs.Text;
+                        conditions = tbConditions.Text;
+                        affiche = tbAffiche.Text;
+                        dateDeb = dtDebut.Value;
+                        dateFin = dtFin.Value;
+                        dateButoirInscrip = dtdateButoirInscrip.Value;
+                        nbPlaceMax = Convert.ToInt32(tbnbPlaceMax.Text.ToString());
+                        if (cbOrganisateur.SelectedIndex != -1)
                         {
-                            MessageBox.Show("Hackathon ajouté " + Modele.RetourneDernierHackathonSaisi());
-                            Annuler();
+                            idOrga = Convert.ToInt32(cbOrganisateur.SelectedValue.ToString());
                         }
-                    }
-                    if (etat == EtatGestion.Update) // cas de la mise à jour
-                    {
-                        HACKATHON H = (HACKATHON)BSListeH.Current;
-                        if (Modele.ModificationHackathon(H.idhackathon, lieu, ville, thematique, objectifs, conditions, affiche, dateDeb, dateFin, idOrga))
+
+
+                        if (etat == EtatGestion.Create) // cas de l'ajout
                         {
-                            MessageBox.Show("Hackathon modifié");
-                            gbInfo.Visible = false;
-                            cbListe.SelectedIndex = -1;
-                           // Annuler();
+                            if (Modele.AjoutHackathon(lieu, ville, thematique, objectifs, conditions, affiche, dateDeb, dateFin, idOrga, nbPlaceMax, dateButoirInscrip))
+                            {
+                                MessageBox.Show("Hackathon ajouté " + Modele.RetourneDernierHackathonSaisi());
+                                Annuler();
+                            }
+                        }
+                        if (etat == EtatGestion.Update) // cas de la mise à jour
+                        {
+                            HACKATHON H = (HACKATHON)BSListeH.Current;
+                            if (Modele.ModificationHackathon(H.idhackathon, lieu, ville, thematique, objectifs, conditions, affiche, dateDeb, dateFin, idOrga, nbPlaceMax, dateButoirInscrip))
+                            {
+                                MessageBox.Show("Hackathon modifié");
+                                gbInfo.Visible = false;
+                                cbListe.SelectedIndex = -1;
+                                Annuler();
+                            }
+                        }
+                        if (etat == EtatGestion.Delete) // cas de la suppression
+                        {
+                            HACKATHON H = (HACKATHON)BSListeH.Current;
+                            if (Modele.SupressionHackathon(H.idhackathon, lieu, ville, thematique, objectifs, conditions, affiche,dateDeb, dateFin, idOrga, nbPlaceMax, dateButoirInscrip))
+                            {
+                                MessageBox.Show("Hackathon supprimer");
+                                gbInfo.Visible = false;
+                                cbListe.SelectedIndex = -1;
+                                Annuler();
+                            }
                         }
                     }
                 }
@@ -162,6 +192,12 @@ namespace AP3_GestionHackathon
                 tbAffiche.Text = H.affiche;
                 dtDebut.Value = H.dateheuredebuth;
                 dtFin.Value = H.dateheurefinh;
+                dtdateButoirInscrip.Value = H.DateButoirInscrip;
+
+                if (H.nbPlaceMax >0)
+                {
+                    tbnbPlaceMax.Text = H.nbPlaceMax.ToString();
+                }
                 if (H.idorganisateur != null)
                 {
                     cbOrganisateur.Text = H.ORGANISATEUR.nom;

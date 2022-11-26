@@ -12,14 +12,13 @@ namespace AP3_GestionHackathon
     using System;
     using System.Collections.Generic;
     
-    public partial class INSCRIRE
+    public partial class ENTREPRISE
     {
-        public int idhackathon { get; set; }
-        public int idequipe { get; set; }
-        public System.DateTime dateinscription { get; set; }
-        public System.DateTime datedésincription { get; set; }
+        public int identreprise { get; set; }
+        public string nomentreprise { get; set; }
+        public string siret { get; set; }
+        public string Adresse { get; set; }
     
-        public virtual EQUIPE EQUIPE { get; set; }
-        public virtual HACKATHON HACKATHON { get; set; }
+        public virtual MEMBRE MEMBRE { get; set; }
     }
 }
